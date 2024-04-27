@@ -1,2 +1,2 @@
-# Fitness-Data-Analyzr-using-Python--
+# Fitness Data Analyzr using Python
  bmi calculator
