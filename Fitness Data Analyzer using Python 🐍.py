@@ -1,55 +1,76 @@
 def calculate_bmi(weight, height):
-    """Calculate the Body Mass Index (BMI) given weight and height."""
+    """
+    Calculate the Body Mass Index (BMI) of a person based on their weight and height.
+
+    Args:
+    weight (float): Weight of the person in kilograms.
+    height (float): Height of the person in meters.
+
+    Returns:
+    float: Body Mass Index (BMI) of the person.
+    """
     return weight / (height ** 2)
 
 
-def calculate_calories_burned(duration, calorie_burn_rate=5):
-    """Calculate the estimated number of calories burned during exercise."""
+def calculate_calories_burned(duration):
+    """
+    Calculate the estimated number of calories burned during exercise based on the duration.
+
+    Args:
+    duration (int): Duration of exercise in minutes.
+
+    Returns:
+    int: Estimated number of calories burned.
+    """
+    calorie_burn_rate = 5  # 5 calories burned per minute of exercise
     return duration * calorie_burn_rate
 
 
 def filter_overweight_people(people_data):
-    """Filter overweight people based on BMI."""
+    """
+    Filter overweight people from the list of people's data based on their BMI.
+
+    Args:
+    people_data (list): List of dictionaries containing information about each person.
+
+    Returns:
+    list: List of dictionaries containing data of overweight people.
+    """
     overweight_people = []
+
     for person in people_data:
         bmi = calculate_bmi(person['weight'], person['height'])
-        if bmi > 25:
+        if bmi >= 25:
             overweight_people.append(person)
+
     return overweight_people
-
-
-def Health_Fit(people_date):
-    health_people = []
-    for person in people_date:
-        bmi = calculate_bmi(person['weight'], person['height'])
-        if bmi < 21:
-            health_people.append(person)
-    return health_people
-
 
 # Main program
 people_data = []
-
+# Sample data to test the functions
 print("Enter fitness data for each person (Enter a blank name to finish):")
+while True:
+    name = input("Enter person's name: ").strip()
+    if not name:
+        break
+    weight = float(input("Enter person's weight in kilograms: "))
+    height = float(input("Enter person's height in meters: "))
+    duration = float(input("Enter exercise duration in minutes: "))
+    person = {'name': name, 'weight': weight, 'height': height, 'duration': duration}
+    people_data.append(person)
 
-name = input("Enter person's name: ").strip()
-weight = float(input("Enter person's weight in kilograms: "))
-height = float(input("Enter person's height in meters: "))
-duration = float(input("Enter exercise duration in minutes: "))
-person = {'name': name, 'weight': weight, 'height': height, 'duration': duration}
-print(person)
+# Test calculate_bmi function
+for person in people_data:
+    bmi = calculate_bmi(person['weight'], person['height'])
+    print(f"{person['name']} has a BMI of {bmi:.2f}")
 
+# Test calculate_calories_burned function
+duration = 30
+calories_burned = calculate_calories_burned(duration)
+print(f"Calories burned after {duration} minutes of exercise: {calories_burned}")
+
+# Test filter_overweight_people function
 overweight_people = filter_overweight_people(people_data)
-if calculate_bmi(weight,height) > 25:
-    print("\nOverweight People:")
+print("Overweight people:")
 for person in overweight_people:
-    bmi = calculate_bmi(person['weight'], person['height'])
-    print(f"{person['name']}: BMI = {bmi:.2f}")
-
-health_people = Health_Fit(people_data)
-if calculate_bmi(weight, height) < bmi:
-    print("\nHealth_fit:")
-for person in health_people:
-    bmi = calculate_bmi(person['weight'], person['height'])
-    calories_burned = calculate_calories_burned(person['duration'])
-    print(f"{person['name']}: BMI = {bmi:.2f}, Calories burned = {calories_burned}")
+    print(f"{person['name']} is overweight with a BMI of {calculate_bmi(person['weight'], person['height']):.2f}")
