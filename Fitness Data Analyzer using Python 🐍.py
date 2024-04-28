@@ -1,7 +1,5 @@
 def calculate_bmi(weight, height):
     """
-    Calculate the Body Mass Index (BMI) of a person based on their weight and height.
-
     Args:
     weight (float): Weight of the person in kilograms.
     height (float): Height of the person in meters.
@@ -13,37 +11,18 @@ def calculate_bmi(weight, height):
 
 
 def calculate_calories_burned(duration):
-    """
-    Calculate the estimated number of calories burned during exercise based on the duration.
-
-    Args:
-    duration (int): Duration of exercise in minutes.
-
-    Returns:
-    int: Estimated number of calories burned.
-    """
     calorie_burn_rate = 5  # 5 calories burned per minute of exercise
     return duration * calorie_burn_rate
 
 
 def filter_overweight_people(people_data):
-    """
-    Filter overweight people from the list of people's data based on their BMI.
-
-    Args:
-    people_data (list): List of dictionaries containing information about each person.
-
-    Returns:
-    list: List of dictionaries containing data of overweight people.
-    """
     overweight_people = []
-
     for person in people_data:
         bmi = calculate_bmi(person['weight'], person['height'])
         if bmi >= 25:
             overweight_people.append(person)
+            return overweight_people
 
-    return overweight_people
 
 # Main program
 people_data = []
@@ -71,6 +50,6 @@ print(f"Calories burned after {duration} minutes of exercise: {calories_burned}"
 
 # Test filter_overweight_people function
 overweight_people = filter_overweight_people(people_data)
-print("Overweight people:")
 for person in overweight_people:
     print(f"{person['name']} is overweight with a BMI of {calculate_bmi(person['weight'], person['height']):.2f}")
+    print("Overweight people:")
