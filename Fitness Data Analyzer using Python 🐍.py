@@ -21,7 +21,7 @@ def filter_overweight_people(people_data):
         bmi = calculate_bmi(person['weight'], person['height'])
         if bmi >= 25:
             overweight_people.append(person)
-            return overweight_people
+    return overweight_people
 
 
 # Main program
