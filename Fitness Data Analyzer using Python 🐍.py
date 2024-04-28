@@ -1,13 +1,5 @@
 def calculate_bmi(weight, height):
-    """
-    Args:
-    weight (float): Weight of the person in kilograms.
-    height (float): Height of the person in meters.
-
-    Returns:
-    float: Body Mass Index (BMI) of the person.
-    """
-    return weight / (height ** 2)
+    return weight / (height * 2)
 
 
 def calculate_calories_burned(duration):
@@ -38,18 +30,14 @@ while True:
     person = {'name': name, 'weight': weight, 'height': height, 'duration': duration}
     people_data.append(person)
 
-# Test calculate_bmi function
+print("\nFitness Analysis:")
 for person in people_data:
     bmi = calculate_bmi(person['weight'], person['height'])
-    print(f"{person['name']} has a BMI of {bmi:.2f}")
+    calories_burned = calculate_calories_burned(person['duration'])
+    print(f"{person['name']}: BMI = {bmi:.2f}, Calories burned = {calories_burned}")
 
-# Test calculate_calories_burned function
-duration = 30
-calories_burned = calculate_calories_burned(duration)
-print(f"Calories burned after {duration} minutes of exercise: {calories_burned}")
-
-# Test filter_overweight_people function
 overweight_people = filter_overweight_people(people_data)
+print("\nOverweight People:")
 for person in overweight_people:
-    print(f"{person['name']} is overweight with a BMI of {calculate_bmi(person['weight'], person['height']):.2f}")
-    print("Overweight people:")
+    bmi = calculate_bmi(person['weight'], person['height'])
+    print(f"{person['name']}: BMI = {bmi:.2f}")
